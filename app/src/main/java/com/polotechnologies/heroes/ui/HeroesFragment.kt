@@ -6,11 +6,13 @@ import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.polotechnologies.heroes.R
 import com.polotechnologies.heroes.adapters.HeroRecyclerAdapter
@@ -18,11 +20,12 @@ import com.polotechnologies.heroes.databinding.FragmentHeroesBinding
 import com.polotechnologies.heroes.uiHosts.HomeFragmentDirections
 import com.polotechnologies.heroes.viewModels.HeroesViewModel
 import com.polotechnologies.heroes.viewModelFactory.HeroesViewModelFactory
+import com.polotechnologies.heroes.viewModels.HeroApiStatus
 
 /**
  * A simple [Fragment] subclass.
  */
-class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
+class HeroesFragment : Fragment(), SearchView.OnQueryTextListener, Toolbar.OnMenuItemClickListener {
 
     private lateinit var mBinding: FragmentHeroesBinding
     private lateinit var mViewModel : HeroesViewModel
@@ -33,6 +36,7 @@ class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
 
         mBinding = FragmentHeroesBinding.inflate(inflater)
         mBinding.lifecycleOwner = this
+        mBinding.tbMain.setOnMenuItemClickListener(this)
         inflateSearchMenu()
 
         mHeroesViewModelFactory =
@@ -40,7 +44,7 @@ class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
                 "man",
                 activity!!.application
             )
-        mViewModel = ViewModelProviders.of(this, mHeroesViewModelFactory).get(HeroesViewModel::class.java)
+        mViewModel = ViewModelProvider(this, mHeroesViewModelFactory).get(HeroesViewModel::class.java)
         mBinding.viewModel = mViewModel
 
         val adapter = HeroRecyclerAdapter(HeroRecyclerAdapter.OnClickListener{
@@ -48,6 +52,9 @@ class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
         })
 
         mBinding.rvHero.adapter = adapter
+        mBinding.swipeRefreshHeroes.setOnRefreshListener {
+            refreshHeroes()
+        }
 
         mViewModel.heroesData.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -62,7 +69,27 @@ class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
                 mViewModel.displaySelectedHeroComplete()
             }
         })
+
         return mBinding.root
+    }
+
+    private fun refreshHeroes() {
+        mViewModel.fetchHeroes("man")
+        mViewModel.heroStatus.observe(viewLifecycleOwner, Observer {
+            when (it) {
+                HeroApiStatus.DONE -> {
+                    mBinding.swipeRefreshHeroes.isRefreshing = false
+                }
+                HeroApiStatus.ERROR -> {
+                    mBinding.imgLoadingStatus.visibility = View.VISIBLE
+                    mBinding.imgLoadingStatus.setImageResource(R.drawable.ic_connection_error)
+                    mBinding.swipeRefreshHeroes.isRefreshing = false
+                }
+                HeroApiStatus.LOADING -> {
+                    mBinding.swipeRefreshHeroes.isRefreshing = true
+                }
+            }
+        })
     }
 
     private fun inflateSearchMenu() {
@@ -87,6 +114,13 @@ class HeroesFragment : Fragment(), SearchView.OnQueryTextListener {
 
     override fun onQueryTextChange(newText: String?): Boolean {
         return false
+    }
+
+    override fun onMenuItemClick(item: MenuItem?): Boolean {
+        if(item!!.itemId == R.id.action_refresh){
+            refreshHeroes()
+        }
+        return true
     }
 
 

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="hero"
-            type="com.polotechnologies.heroes.dataModels.Hero" />
+            name="favouriteHero"
+            type="com.polotechnologies.heroes.database.favouriteHero.FavouriteHero" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"
-            app:imageUrl="@{hero}"/>
+            app:favImageUrl="@{favouriteHero}"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_hero_name"
@@ -36,8 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_hero_image"
             tools:text="Batman"
-            android:text="@{hero.name}"
-            />
+            app:favHeroName="@{favouriteHero}"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

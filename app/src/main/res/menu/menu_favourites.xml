@@ -9,4 +9,9 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         />
 
+    <item
+        android:id="@+id/action_clear"
+        app:showAsAction="never"
+        android:title="@string/menu_clear_favourites"/>
+
 </menu>

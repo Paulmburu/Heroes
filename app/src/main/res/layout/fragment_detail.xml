@@ -43,7 +43,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@tools:sample/backgrounds/scenic" />
+                    tools:src="@drawable/bat_man" />
 
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -71,27 +71,464 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp">
 
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/name"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_biography"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
-                    app:heroName="@{viewModel.selectedHero}"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="SUperMan" />
+                    android:layout_marginBottom="4dp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_biography_tittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/tittle_biography"
+                        android:textColor="@android:color/black"
+                        android:textSize="28sp"
+                        app:layout_constraintBottom_toTopOf="@+id/cv_heroes_biography"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_expand_biography"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_biography_tittle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_biography_tittle"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_down" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_heroes_biography"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        style="@style/Heroes.Card.Details"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_biography_tittle">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_full_name_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_full_name"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_full_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.biography.fullName}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_full_name_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_full_name_label" />
+
+                            <View
+                                android:id="@+id/divider_name"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_full_name"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_full_name" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_alter_egos_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_alter_egos"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_name"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_name" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_alter_egos"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@{viewModel.selectedHero.biography.alterEgos}"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_alter_egos_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_alter_egos_label" />
+
+                            <View
+                                android:id="@+id/divider_egos"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_alter_egos"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_alter_egos" />
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_aliases_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_aliases"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_egos"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_egos" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_aliases"
+                                heroAliases="@{viewModel.selectedHero}"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_aliases_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_aliases_label" />
+
+                            <View
+                                android:id="@+id/divider_aliases"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_aliases"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_aliases" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_place_of_birth_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_place_of_birth"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_aliases"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_aliases" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_place_of_birth"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.biography.placeOfBirth}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_place_of_birth_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_place_of_birth_label" />
+
+                            <View
+                                android:id="@+id/divider_place_of_birth"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_place_of_birth"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_place_of_birth" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_first_appearance_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_first_appearance"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_place_of_birth"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_place_of_birth" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_first_appearance"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.biography.firstAppearance}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_first_appearance_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_first_appearance_label" />
+
+                            <View
+                                android:id="@+id/divider_first_appearance"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_first_appearance"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_first_appearance" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_publisher_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_publisher"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_first_appearance"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_first_appearance" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_publisher"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.biography.publisher}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_publisher_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_publisher_label" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_work"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/layout_connections"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_biography">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_work_tittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:text="@string/tittle_work"
+                        android:textColor="@android:color/black"
+                        android:textSize="28sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_expand_work"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_work_tittle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_work_tittle"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_down" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_heroes_work"
+                        style="@style/Heroes.Card.Details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_work_tittle">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_occupation_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_occupation"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_occupation"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.work.occupation}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_occupation_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_occupation_label" />
+
+                            <View
+                                android:id="@+id/divider_occupation"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_occupation"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_occupation" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_base_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_base"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_occupation"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_occupation" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_base"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@{viewModel.selectedHero.work.base}"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_base_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_base_label" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_connections"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_work">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_connections_tittle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/tittle_connection"
+                        android:textColor="@android:color/black"
+                        android:textSize="28sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_expand_connections"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_connections_tittle"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_connections_tittle"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_down" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cv_heroes_connections"
+                        style="@style/Heroes.Card.Details"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_connections_tittle">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_group_affiliation_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_group_affiliation"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_group_affiliation"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text='@{viewModel.selectedHero.connections.groupAffiliation}'
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_group_affiliation_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_group_affiliation_label" />
+
+                            <View
+                                android:id="@+id/divider_affiliation"
+                                android:layout_width="0dp"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="4dp"
+                                android:background="?android:attr/listDivider"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_group_affiliation"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_group_affiliation" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_relatives_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@string/label_relatives"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toStartOf="@+id/divider_affiliation"
+                                app:layout_constraintTop_toBottomOf="@+id/divider_affiliation" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_hero_relatives"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="@{viewModel.selectedHero.connections.relatives}"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="@+id/tv_hero_relatives_label"
+                                app:layout_constraintTop_toBottomOf="@+id/tv_hero_relatives_label" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.core.widget.NestedScrollView>
 
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </layout>

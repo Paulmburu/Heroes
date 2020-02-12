@@ -8,5 +8,24 @@
     <string name="search_hint">Search Hero</string>
     <string name="toolbar_title_superheros">Superheros</string>
     <string name="menu_add_to_favourites">Add to Favourites</string>
+    <string name="toolbar_title_favourite_superheros">Favourites</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_clear_favourites">Clear Favourites</string>
+    <string name="heading_biography">Biography</string>
+    <string name="tittle_biography">Biography</string>
+    <string name="label_full_name">Full Name</string>
+    <string name="label_alter_egos">Alter Egos</string>
+    <string name="label_aliases">Aliases</string>
+    <string name="label_place_of_birth">Place of Birth</string>
+    <string name="label_first_appearance">First Appearance</string>
+    <string name="label_publisher">Publisher</string>
+    <string name="tittle_work">Work</string>
+    <string name="label_occupation">Occupation</string>
+    <string name="label_base">Base</string>
+    <string name="label_group_affiliation">Group Affiliation</string>
+    <string name="label_relatives">Relatives</string>
+    <string name="tittle_connection">Connections</string>
+    <string name="info_failed_to_add_to_favourite">Failed to Add to Favourites</string>
+    <string name="info_added_to_favourite">Added to Favourites</string>
 
 </resources>

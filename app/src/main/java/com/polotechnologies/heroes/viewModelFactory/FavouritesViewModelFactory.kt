@@ -19,22 +19,21 @@ package com.polotechnologies.heroes.viewModelFactory
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.polotechnologies.heroes.dataModels.Hero
+import com.polotechnologies.heroes.database.HeroesDatabase
 import com.polotechnologies.heroes.database.favouriteHero.DaoFavouriteHero
-import com.polotechnologies.heroes.viewModels.DetailViewModel
+import com.polotechnologies.heroes.viewModels.FavouriteViewModel
+import com.polotechnologies.heroes.viewModels.HeroesViewModel
 
 /**
  * Simple ViewModel factory that provides the Hero and context to the ViewModel.
  */
-class DetailViewModelFactory(
-    private val superHero: Hero,
+class FavouritesViewModelFactory(
     private val application: Application,
     private val database: DaoFavouriteHero) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(
-                superHero,
+        if (modelClass.isAssignableFrom(FavouriteViewModel::class.java)) {
+            return FavouriteViewModel(
                 application,
                 database
             ) as T
